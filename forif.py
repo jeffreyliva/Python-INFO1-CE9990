@@ -1,7 +1,6 @@
 """
 
 forif.py
-
 get the first 10 numbers of the fibonacci sequence
 
 """
@@ -20,8 +19,5 @@ def fibonacci(n):
 
 for z in range(0, 10):
     print(fibonacci(z))
-
-sys.exit(0)
-print("All good children go to heaven")
 
 sys.exit(0)

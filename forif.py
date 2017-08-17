@@ -2,24 +2,26 @@
 
 forif.py
 
-my favorite part of the song "You never give me your money"
+get the first 10 numbers of the fibonacci sequence
 
 """
 
 import sys
 
-i = 1
-while i < 8:
-    print(i)
-    i += 1
+def fibonacci(n):
+    x = 0
+    y = 1
+    for i in range(0, n):
+        current = x
+        x = y
+        y = current + y
+    return x
 
-print("All good children go to heaven")
 
-print()   
+for z in range(0, 10):
+    print(fibonacci(z))
 
-for i in range(1, 8, 1):
-    print(i)
-
+sys.exit(0)
 print("All good children go to heaven")
 
 sys.exit(0)

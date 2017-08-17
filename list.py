@@ -1,164 +1,127 @@
 """
-
 list.py
 
-The Beatles and Songwriting credits 
-
+The Beatles and Songwriting credits
 """
-
-
 
 import sys
 
-Lennon = [
-    ["No Reply",                                1964,
-        ["Beatles For Sale"]
-    ],
+songwriters = (
+    None,
 
-    ["Tomorrow Never Knows",                    1964,  
-        ["Revolver"]
-    ],
+    ("Lennon", (
+        ("Beatles For Sale", 1964, (
+            "No Reply",
+        )),
+        ("Revolver", 1964, (
+            "Tomorrow Never Knows",
+        )),
+        ("Help!", 1965, (
+            "Help",
+        )),
+        ("A Hard Day's Night", 1964, (
+            "A Hard day's Night",
+        )),
+        ("Abbey Road", 1969, (
+           "Come Together",
+        )),
+        ("Magical Mystery Tour", 1966, (
+            "Strawberry Fields Forever",
+        ))
+    )),
 
-    ["Help",                                    1965,  
-        ["Help!"]
-    ],
+    ("McCartney", (
+        ("Revolver", 1966, (
+            "Got to Get You Into My Life",
+        )),
+        ("Help!", 1965, (
+            "The Nght Before",
+        )),
+        ("A Hard Day's Night", 1964, (
+            "Things We Said Today",
+        )),
+        ("With the Beatles", 1964, (
+            "All My Loving",
+        )),
+        ("Revolver", 1966, (
+            "For No One",
+        )),
+        ("Please Please Me", 1963, (
+            "I Saw Her Standing There",
+        )),
+        ("Help!", 1965, (
+            "Yesterday",
+        ))
+    )),
 
-    ["A Hard Day's Night",                      1964,  
-        ["A Hard Day's Night"]
-    ],
+    ("Starr", (
+        ("Abbey Road", 1969, (
+            "Octopus's Garden",
+        )),
+        ("The Beatles", 1968, (
+            "Don't Pass Me By",
+        ))
+    )),
 
-    ["Come Together",                           1969,  
-        ["Abbey Road"]
-    ]
-    ["Strawberry Fields Forever",               1966,
-        ["Magical Mystery Tour"],
-    ]
-    
-]
+    ("Harrison", (
+        ("The Beatles", 1968, (
+            "While My Guitar Gently Weeps",
+        )),
+        ("Abbey Road", 1969, (
+            "Something",
+        )),
+        ("Sgt. Pepper's Lonely Hearts Club Band", 1967, (
+            "Within You Without You",
+        ))
+    )),
 
-McCartney = [
-     ["Got to Get You Into My Life",            1966,
-        ["Revolver"]
-     ],
-     ["The Night Before",                       1965,
-        ["Help!"]
-     ],
-     ["Things We Said Today",                   1964,
-        ["A Hard Days Night"]
-     ],
-     ["All My Loving",                          1964,
-        ["With the Beatles"]
-     ],
-     ["For No One",                             1966,
-        ["Revolver"]
-     ],
-     ["I Saw Her Standing There",               1963,
-        ["Please Please Me"]
-     ],
-     ["Yesterday",                              1965,
-        ["Help!"],
-     ],
-]
-
-Starr = [
-     ["Octopus's Garden",                       1969,  
-        ["Abey Road"]
-     ],
-     ["Don't Pass me By",                       1968,
-        ["The Beatles"]
-     ]
-
-]
-
-
-Harrison = [
-     ["While My Guitar Gently Weeps",           1968,  
-        ["The Beatles"]
-     ],
-
-     ["Something",                              1969,  
-        ["Abbey Road"]
-     ],
-
-     ["Within You Without You",                 1967,  
-        ["Sgt. Pepper's Lonely Hearts Club Band"]
-     ]
-
-     
-]
-
-McCartney-Lennon = [
-    ["Drive my Car",                            1966,
-         ["Rubber Soul"]
-    ],
-
-    ["Ticket to Ride",                          1965,
-         ["Help!"]
-    ],
-    ["Norwegian Wood (This Bird Has Flown",     1965,
-         ["Rubber Soul"]
-    ],
-    ["In My Life",                              1965,
-         ["Rubber Soul"],
-    ],
-    ["A Day in the Life",                       1967,
-         ["Stg. Pepper's Lonely Hearts Club Band"],
-    ]
-     
-]    
-
-beatles = [
-    Lennon,           #0
-    McCartney,        #1
-    Starr,            #2
-    Harrison,         #3
-    McCartney-Lennon, #4
-    
-]
-
-print("Enter")
-for i, beatle in enumerate(beatles):
-    print("'", i, "' ", "for ", beatle[0][3][0], sep = "")
-
-f = """\
-Title: {}
-Year: {}
-Album: """
+    ("McCartney/Lennon", (
+        ("Rubber Soul", 1966, (
+            "Drive My Car",
+        )),
+        ("Help!", 1965, (
+            "Ticket To Ride",
+        )),
+        ("Rubber Soul", 1965, (
+            "Norwegian Wood (This Bird Has Flown)",
+        )),
+        ("Rubber Soul", 1965, (
+             "In My Life",
+        )),
+        ("Sgt. Pepper's Lonely Hearts Club Band", 1967, (
+            "A Day in the Life",
+        ))
+    ))
+)
 
 while True:
-
     while True:
+        print("Enter")
+        for i, songwriter in enumerate(songwriters[1:], start = 1):
+            print("'", i, "' ", "for ", songwriter[0], sep = "")
+
         try:
-            songwriter = input()
+            s = input()
         except EOFError:
             sys.exit(0)
 
         try:
-            songwriter = int(songwriter)
+            i = int(s)
         except ValueError:
-            print()
-            print("Sorry,", songwriter, "is not a valid selection. Please try again.")
-            print()
-            continue   #Go back up to the second "while"
+            print("Sorry,", s, "is not an integer.  Please try again.")
+            continue
 
-        if 0 <= songwriter and songwriter < len(beatles):
-            break;
+        if 0 <= i < len(songwriters):
+            break
 
-        print()
-        print("Sorry,", songwriter, "is not a valid selection. Please try again.")
-        print()
+        print("Sorry, must be in range 0 to", len(songwriters)-1, "inclusive.")
+        print("Please try again.")
 
-    print() #Skip a line
+    songwriter = songwriters[i]
+    print("Songwriter:", songwriter[0])
+    for album in songwriter[1]:
+        print("    Album: ", album[0], " (", album[1], ")", sep = "")
+        for title in album[2]:
+            print("       ", title)
 
-    for title in beatles[songwriter]:
-        print(f.format(title[0], title[1], title[2]), end = "")
-        songwriter = title[3]
-
-        for i, album in enumerate(albums):
-            if i == len(albums) - 1:
-                print(album)             #the last star
-            else:
-                print(album, end = ",") #the other stars
-            print() #Skip a line
-
-sys.exit(0)
+    print()

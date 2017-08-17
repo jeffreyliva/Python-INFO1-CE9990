@@ -41,6 +41,7 @@ class Date(object):
 	november = 11
 	december = 12
 
+
 	def __init__(self, month, day, year):
 		assert isinstance(year, int)
 		assert isinstance(month, int) and 1 <= month and month <= Date.monthsInYear()
@@ -126,22 +127,23 @@ class Date(object):
 	
 	@staticmethod
 	def daysInYear():
-		"""Returns the days in year"""
+		"Returns the days in year"
 		return	sum (Date.lengths[1:])
 
 	#The definition of class Date ends here.
 
-d = Date(Date.january,  5, 2017)		  #Call the instance method in line 32.
-e = Date(Date.december, 7, 2017)
+d = Date(Date.june, 18, 2017)		  #Call the instance method in line 32.
+e = Date(Date.december, 31, 2018)
 print("months in year =", d.monthsInYear())
 print("Days in year:",d.daysInYear())
 print("type(d) =", type(d))
 print()
+
 #These three statements do the same thing:
 print("d =", d)
 print("d =", str(d))
 print("d =", d.__str__())	   #Call the instance method in line 54.
-print()
+
 print("month =", d.getMonth()) #Call the instance method in line 46.
 print("day =", d.getDay())	   #Call the instance method in line 50.
 print("year =", d.getYear())   #Call the instance method in line 42.
@@ -154,12 +156,12 @@ d.nextDays(7)				   #Call the instance method in line 74.
 print(d, "is a week after that.")
 d.prevDays(8)
 d.prevDay()
-print(d, "was yesterday")
+print(d, "was a day before")
 d.prevDays(7)
 print(d, "was a week ago.")
-if d > e:
-	print(d,"comes after",e)
-else:
-	print(d,"comes before",e)
-print(e - d)
+print()
+print("There are", d.__sub__(e), "day(s) between", d, "and", e) 
+print()
+       
+
 sys.exit(0)
